@@ -59,5 +59,50 @@ namespace LINQproblems
             Console.ReadLine();
 
         }
+
+        public string ProblemFour(string userInput)
+        {
+            StringBuilder sb = new StringBuilder();
+            char[] stringArray = userInput.ToArray();
+            Array.Sort(stringArray);
+            int charCount = 0;
+            for(int i = 0; i < stringArray.Length; i++)
+            {
+                for(int j = 0; j < stringArray.Length; j++)
+                {
+                    if(stringArray[i] == stringArray[j])
+                    {
+                        charCount++;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+               try
+               {
+                  if (stringArray[i] == stringArray[i + 1])
+                  {
+                     charCount = 0;
+                     continue;
+                  }
+                  else
+                  {
+                     sb.Append($"{stringArray[i]}{charCount}");
+                     charCount = 0;
+                  }
+
+               }   
+               catch(IndexOutOfRangeException)
+               {
+                    stringArray[i] = stringArray[i];
+                    sb.Append($"{stringArray[i]}{charCount}");
+               }
+                    
+            }
+            Console.WriteLine(sb);
+            Console.ReadLine();
+            return sb.ToString();
+        }
     }
 }
