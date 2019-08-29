@@ -19,10 +19,10 @@ namespace LINQproblems
         {
             List<string> words = new List<string>() { "the", "bike", "this", "it", "tenth", "mathematics" };
             var wordsWithTH = words.Where(w => w.Contains("th"));
-            foreach(var THwords in wordsWithTH)
+            foreach (var THwords in wordsWithTH)
             {
                 Console.WriteLine(THwords);
-               
+
             }
             Console.ReadLine();
         }
@@ -33,27 +33,27 @@ namespace LINQproblems
             List<string> newNames = names.Distinct().ToList();
             foreach (var item in newNames)
             {
-                Console.WriteLine(item);    
+                Console.WriteLine(item);
             }
             Console.ReadLine();
             return newNames;
         }
-        
+
         public void ProblemThree(List<string> classGrades)
         {
-            List <double> gradeAvgs = new List<double>();
+            List<double> gradeAvgs = new List<double>();
             List<int> gradeHolder = new List<int>();
-            for(int i = 0; i < classGrades.Count; i++)
+            for (int i = 0; i < classGrades.Count; i++)
             {
                 var Student = classGrades[i];
-                string [] StudentScores = Student.Split(',');
-                foreach(string score in StudentScores)
+                string[] StudentScores = Student.Split(',');
+                foreach (string score in StudentScores)
                 {
                     gradeHolder.Add(int.Parse(score));
                 }
                 gradeHolder.Remove(gradeHolder.Min());
                 gradeAvgs.Add(gradeHolder.Average());
-                gradeHolder.RemoveRange(0,gradeHolder.Count);
+                gradeHolder.RemoveRange(0, gradeHolder.Count);
             }
             Console.WriteLine(gradeAvgs.Average());
             Console.ReadLine();
@@ -63,14 +63,14 @@ namespace LINQproblems
         public string ProblemFour(string userInput)
         {
             StringBuilder sb = new StringBuilder();
-            char[] stringArray = userInput.ToArray();
-            Array.Sort(stringArray);
+            var input = userInput.OrderBy(c => c);
+            char[] stringArray = input.ToArray();
             int charCount = 0;
-            for(int i = 0; i < stringArray.Length; i++)
+            for (int i = 0; i < stringArray.Length; i++)
             {
-                for(int j = 0; j < stringArray.Length; j++)
+                for (int j = 0; j < stringArray.Length; j++)
                 {
-                    if(stringArray[i] == stringArray[j])
+                    if (stringArray[i] == stringArray[j])
                     {
                         charCount++;
                     }
@@ -79,30 +79,31 @@ namespace LINQproblems
                         continue;
                     }
                 }
-               try
-               {
-                  if (stringArray[i] == stringArray[i + 1])
-                  {
-                     charCount = 0;
-                     continue;
-                  }
-                  else
-                  {
-                     sb.Append($"{stringArray[i]}{charCount}");
-                     charCount = 0;
-                  }
+                try
+                {
+                    if (stringArray[i] == stringArray[i + 1])
+                    {
+                        charCount = 0;
+                        continue;
+                    }
+                    else
+                    {
+                        sb.Append($"{stringArray[i]}{charCount}");
+                        charCount = 0;
+                    }
 
-               }   
-               catch(IndexOutOfRangeException)
-               {
+                }
+                catch (IndexOutOfRangeException)
+                {
                     stringArray[i] = stringArray[i];
                     sb.Append($"{stringArray[i]}{charCount}");
-               }
-                    
+                }
+
             }
             Console.WriteLine(sb);
             Console.ReadLine();
             return sb.ToString();
         }
+
     }
 }
